@@ -9,20 +9,20 @@
 
 class ExceptionParameters extends ExceptionObj {
 
-	######################################################################################
-	# Method: __construct(...)
-	# Arguments:
-	#   - $message (string) :: Message to display for user
-	# Purpose: Creates a new application object
-	######################################################################################
-	public function __construct( $message = null, $code = 0 ) {
-	
-		parent::__construct( $message, $code );
-	
-	}
+    ######################################################################################
+    # Method: __construct(...)
+    # Arguments:
+    #   - $message (string) :: Message to display for user
+    # Purpose: Creates a new application object
+    ######################################################################################
+    public function __construct( $message = null, $code = 0 ) {
+    
+        parent::__construct( $message, $code );
+    
+    }
 
-	
-	
+    
+    
 }
 
 ?>
