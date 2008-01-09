@@ -25,27 +25,27 @@ date_default_timezone_set("America/Chicago");
 # Purpose: Import unincluded classes during runtime.
 ##########################################################################################
 function __autoload($classname) {
-	
-	/* Figure out class directory */
-	if(is_dir("./classes")) {
-		$fileBase = "./classes/";
-	} elseif(is_dir("../classes")) {
-		$fileBase = "../classes/";
-	} elseif(is_dir("../../classes")) {
-		$fileBase = "../../classes/";
-	} else {
-		die("Error: Could not locate classes directory!");
-	}
-	
-	/* Import class */
-	if(file_exists($fileBase . $classname . ".class.php")) {
-		require_once($fileBase . $classname . ".class.php");
-	} else if(file_exists("/usr/share/packages/DCIG_base/".$classname.".class.php")) { 
-		require_once("/usr/share/packages/DCIG_base/".$classname.".class.php");
-	}else {
-		require_once($classname . ".php");
-	}
-	
+    
+    /* Figure out class directory */
+    if(is_dir("./classes")) {
+        $fileBase = "./classes/";
+    } elseif(is_dir("../classes")) {
+        $fileBase = "../classes/";
+    } elseif(is_dir("../../classes")) {
+        $fileBase = "../../classes/";
+    } else {
+        die("Error: Could not locate classes directory!");
+    }
+    
+    /* Import class */
+    if(file_exists($fileBase . $classname . ".class.php")) {
+        require_once($fileBase . $classname . ".class.php");
+    } else if(file_exists($fileBase . "base/" . $classname . ".class.php")) { 
+        require_once($fileBase . "base/" . $classname . ".class.php");
+    }else {
+        require_once($classname . ".php");
+    }
+    
 }
 
 ##########################################################################################
@@ -55,8 +55,8 @@ function __autoload($classname) {
 # Purpose: Catch uncaught exceptions
 ##########################################################################################
 function handleExceptions($exception) {
-	echo "<em>UNCAUGHT EXCEPTION</em><br />";
-	$exception->exceptionCrash();
+    echo "<em>UNCAUGHT EXCEPTION</em><br />";
+    $exception->exceptionCrash();
 }
 set_exception_handler("handleExceptions");
 
@@ -64,15 +64,15 @@ set_exception_handler("handleExceptions");
 # Function: set_error_handler
 # Arguments:
 #   - $errno   (int)    :: 
-#	- $errstr  (string) ::
-#	- $errfile (string) ::
-#	- $errline (int)    :: 
+#    - $errstr  (string) ::
+#    - $errfile (string) ::
+#    - $errline (int)    :: 
 # Purpose: Catch and process errors
 ##########################################################################################
 function handleErrors($errno,$errstr,$errfile,$errline) {
-	if($errno != E_STRICT) { // I have no interest in these suggestions.
-		throw new ExceptionError($errstr);
-	}
+    if($errno != E_STRICT) { // I have no interest in these suggestions.
+        throw new ExceptionError($errstr);
+    }
 }
 set_error_handler("handleErrors");
 
