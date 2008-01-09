@@ -7,10 +7,4 @@
 # Purpose: Entry point of application
 ##########################################################################################
 
-echo "Test 1 - Creating AppObj ... ";
-$t = new AppObj("piggy");
-echo "[ SUCCESS ]<br />";
-
-
-
 ?>
