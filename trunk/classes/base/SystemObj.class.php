@@ -86,22 +86,20 @@ class SystemObj {
     public function connectToDatabase() {
     
         /* Make sure the proper configuration files exist */
-        if(!defined($this->namespace . "DBHOST") ||
-                !defined($this->namespace . "DBNAME") ||
-                !defined($this->namespace . "DBUSER") ||
-                !defined($this->namespace . "DBPASS")) {
+        if(!$this->d("DBHOST") || !$this->d("DBNAME") || 
+           !$this->d("DBUSER") || !$this->d("DBPASS")) {
         
-            throw new ExceptionParameters("Could not find database connection settings");
+            throw new ExceptionDB("Could not find database connection settings");
         
         }
         
-        /* Connect to database */
+        /* Connect to database or send exception upwards */
         try {
             $this->db = $this->db_connect($this->c("DBHOST"), $this->c("DBUSER"), 
                             $this->c("DBPASS"));
             $this->db_select_db($this->c("DBNAME"),$this->db);            
-        } catch(ExceptionDB $e) {
-            $e->exceptionCrash();
+        } catch(ExceptionDB $ex) {
+            throw $ex;
         }
 
     }    
