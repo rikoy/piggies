@@ -17,9 +17,9 @@ if(!file_exists(FILE_DEPTH . "settings.phpMyWallet.ini")) {
 /* Try to create an object */
 try {
 	$systemObj = new phpMyWallet("phpMyWallet");
-} catch(DBException $ex) {
-	echo "<p>We could connect to the database you provided in your 
-		settings.phpMyWallet.ini file.  Received the following error: </p>";
+} catch(ExceptionDB $ex) {
+	echo "<p>We could not connect to the database you provided in your 
+		settings.phpMyWallet.ini file.</p>";
 	exit();
 }
 

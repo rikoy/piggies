@@ -46,33 +46,4 @@ function __autoload($classname) {
     
 }
 
-##########################################################################################
-# Function: set_exception_handler
-# Arguments:
-#   - $exception (Exception) :: Uncaught Exception Object
-# Purpose: Catch uncaught exceptions
-##########################################################################################
-function handleExceptions($exception) {
-    echo "<em>UNCAUGHT EXCEPTION</em><br />";
-    $exception->exceptionCrash();
-}
-set_exception_handler("handleExceptions");
-ini_set("display_errors",1);
-
-##########################################################################################
-# Function: set_error_handler
-# Arguments:
-#   - $errno   (int)    :: 
-#    - $errstr  (string) ::
-#    - $errfile (string) ::
-#    - $errline (int)    :: 
-# Purpose: Catch and process errors
-##########################################################################################
-function handleErrors($errno,$errstr,$errfile,$errline) {
-    if($errno != E_STRICT) { // I have no interest in these suggestions.
-        throw new ExceptionError($errstr);
-    }
-}
-set_error_handler("handleErrors");
-
 ?>

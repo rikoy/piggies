@@ -23,7 +23,7 @@ class phpMyWallet extends AppObj {
 		try {
 			$this->connectToDatabase();
 		} catch(ExceptionDB $ex) {
-			throw new ExceptionDB();
+			throw $ex;
 		}
 	
 	}
