@@ -11,10 +11,6 @@
 # System Constants
 ##########################################################################################
 
-/* Error Emailing */
-define("SYSTEM_DEVELOPER_EMAIL", "keith.framnes@gmail.com");
-define("SYSTEM_EMAIL_HOST", "localhost");
-
 /* System Timezone */
 date_default_timezone_set("America/Chicago");
 
@@ -38,11 +34,13 @@ function __autoload($classname) {
     }
     
     /* Import class */
-    if(file_exists($fileBase . $classname . ".class.php")) {
-        require_once($fileBase . $classname . ".class.php");
+    if(file_exists($fileBase . "app/" . $classname . ".class.php")) {
+        require_once($fileBase . "app/" . $classname . ".class.php");
     } else if(file_exists($fileBase . "base/" . $classname . ".class.php")) { 
         require_once($fileBase . "base/" . $classname . ".class.php");
-    }else {
+    } else if($classname == "PHPMailer") { 
+        require_once($fileBase . "phpmailer/class.phpmailer.php");
+    } else {
         require_once($classname . ".php");
     }
     
@@ -59,6 +57,7 @@ function handleExceptions($exception) {
     $exception->exceptionCrash();
 }
 set_exception_handler("handleExceptions");
+ini_set("display_errors",1);
 
 ##########################################################################################
 # Function: set_error_handler

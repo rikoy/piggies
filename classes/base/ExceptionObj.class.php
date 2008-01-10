@@ -27,20 +27,14 @@ class ExceptionObj extends Exception {
     # Purpose: Crashes on this exception, notifies user, sends email
     ######################################################################################
     function exceptionCrash($redirectURI = "errors.php") {
-        
-        /* Email me about errors */
-        if(!defined("ERROR_EMAIL_TO")) { define("ERROR_EMAIL_TO","kframnes@demicooper.com"); }
-        if(!defined("ERROR_EMAIL_FROM")) { define("ERROR_EMAIL_FROM","errors@unknown.com"); }
-        if(!defined("ERROR_EMAIL_HOST")) { define("ERROR_EMAIL_HOST","localhost"); }
-        if(!defined("ERROR_EMAIL_SUBJ")) { define("ERROR_EMAIL_SUBJ","Generic Error"); }
-        
+               
         Emailer::sendmail(
             array(
-                "to"      => array(ERROR_EMAIL_TO),
-                "from"    => ERROR_EMAIL_FROM,
-                "host"    => ERROR_EMAIL_HOST,
+                "to"      => array("keith.framnes@gmail.com"),
+                "from"    => "phpMyWallet@gmail.com",
+                "host"    => "localhost",
                 "message" => str_replace("<br />","\n",$this->__toString()),
-                "subject" => ERROR_EMAIL_SUBJ
+                "subject" => "phpMyWallet Error"
             )    
         );
         

@@ -53,9 +53,6 @@ class Emailer extends UtilityObj {
         if(Validator::hasErrors()) {
             throw new ExceptionValidation(Validator::getErrors());
         }
-
-        /* Import package */
-        require_once("/usr/share/packages/phpmailer/class.phpmailer.php");
     
         /* Set arguments and send email */
         $mail = new PHPMailer();
