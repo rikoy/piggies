@@ -23,6 +23,6 @@ try {
 	exit();
 }
 
-/* */
+/* Verifying... */
 
 ?>
