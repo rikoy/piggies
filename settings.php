@@ -11,9 +11,16 @@
 # System Constants
 ##########################################################################################
 define("SYS_VERSION", "0.0.1-alpha");
+define("SYS_DEBUG", true);
 
 /* System Timezone */
 date_default_timezone_set("America/Chicago");
+
+if(SYS_DEBUG) { 
+    ini_set("display_errors",1); 
+} else {
+    ini_set("display_errors",0); 
+}
 
 ##########################################################################################
 # Function: __autoload(...)
@@ -35,14 +42,10 @@ function __autoload($classname) {
     }
     
     /* Import class */
-    if(file_exists($fileBase . "app/" . $classname . ".class.php")) {
-        require_once($fileBase . "app/" . $classname . ".class.php");
-    } else if(file_exists($fileBase . "base/" . $classname . ".class.php")) { 
-        require_once($fileBase . "base/" . $classname . ".class.php");
+    if(file_exists($fileBase . $classname . ".class.php")) {
+        require_once($fileBase . $classname . ".class.php");
     } else if($classname == "PHPMailer") { 
         require_once($fileBase . "phpmailer/class.phpmailer.php");
-    } else {
-        require_once($classname . ".php");
     }
     
 }

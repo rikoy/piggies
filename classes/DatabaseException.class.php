@@ -1,12 +1,12 @@
 <?php
 
 ##########################################################################################
-# Class: FormBuilder
+# File: DatabaseException.class.php
 # Modified:
-#   - [06.07.2007 :: Keith]  Created.
-# Purpose: Contains static methods used for building complex form inputs in the system.
+#   - [06.08.2007 :: Keith]  Created.
+# Purpose: This class extends PHP Exception class and has mechanisms for handling 
+#   Database exceptions.
 ##########################################################################################
 
-class FormBuilder extends UtilityObj {}
 
 ?>
