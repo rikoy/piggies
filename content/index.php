@@ -54,7 +54,7 @@
     <?php 
         $obj = new SystemRoot;
         try {
-            $obj->connectToDatabase();
+            $obj->verifyDatabase();
         } catch(SystemException $ex) {
             $status   = str_replace($responseTemplate['bad'],"[[msg]]","Failed!");
             $hasError = true;

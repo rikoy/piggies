@@ -9,6 +9,8 @@
 
 class SystemRoot {
     
+    private $db;
+    
     ######################################################################################
     # Function: __construct(...)  
     # Purpose : Creates the object.
@@ -19,14 +21,21 @@ class SystemRoot {
     # Function: connectToDatabase(...)  
     # Purpose : Connects to the database defined in config.php
     ######################################################################################
-    public function connectToDatabase() {
+    public function verifyDatabase() {
         
         /* Verify System Constants */
         if(!$this->_verifySystemConstants()) {
             throw new SystemException();
         }
         
-        /*  */
+        /* Attempt to connect to database and return results */
+        try {
+        	$this->db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS);
+        } catch(DatabaseException $ex) {
+        	/* DO SOMETHING USEFUL */
+        }
+        
+        /* RETURN SOMETHING */
         
     }
     
