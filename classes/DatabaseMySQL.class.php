@@ -8,5 +8,11 @@
 #   to perform database operations.
 ##########################################################################################
 
+class DatabaseMySQL implements IDatabase {
+    
+    public function __construct() {}
+    public function db_connect($host,$user,$pass) {}
+    
+}
 
 ?>

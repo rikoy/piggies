@@ -7,5 +7,10 @@
 # Purpose: This interface defines the functions that all database classes must implement.
 ##########################################################################################
 
+interface IDatabase {
+    
+    public function db_connect($host,$user,$pass);
+    
+}
 
 ?>

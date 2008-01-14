@@ -45,6 +45,19 @@ class SystemRoot {
     # Returns : (1) true - if all the required constants exist, (2) an array of constant
     #   names the system requires but could not find.
     ######################################################################################    
+    private function _createDatabaseResource() {
+        
+        $dbType   = "Database".SYS_DB_TYPE;
+        $this->db = new $dbType();
+        
+    }    
+    
+    ######################################################################################
+    # Function: _verifySystemConstants(...)
+    # Purpose : Verifies that all the required system constants are defined
+    # Returns : (1) true - if all the required constants exist, (2) an array of constant
+    #   names the system requires but could not find.
+    ######################################################################################    
     private function _verifySystemConstants() {
         
         /* Check each constant for value */
