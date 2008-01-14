@@ -38,7 +38,7 @@
     <!-- Making sure we have a define database type -->
     <tr><td>Checking for a valid database type</td>
     <?php 
-        $validDBSystems = array("MYSQL");
+        $validDBSystems = array("MySQL");
         if(!defined("SYS_DB_TYPE") || !in_array(SYS_DB_TYPE,$validDBSystems)) {
             $status   = str_replace($responseTemplate['bad'],"[[msg]]","Failed!");
             $hasError = true;
