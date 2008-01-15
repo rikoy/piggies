@@ -22,6 +22,9 @@ if(SYS_DEBUG) {
     ini_set("display_errors",0); 
 }
 
+/* Include functions */
+require_once("functions.php");
+
 ##########################################################################################
 # Function: __autoload(...)
 # Arguments:

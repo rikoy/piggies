@@ -24,12 +24,12 @@
     <!-- Looking for the config.php file -->
     <tr><td>Checking for a valid config.php file</td>
     <?php 
-        if(!file_exists(FILE_DEPTH . "config.php")) {
+        if(!file_exists(FILE_DEPTH . "includes/config.php")) {
             $status   = str_replace($responseTemplate['bad'],"[[msg]]","Failed!");
             $hasError = true;
         } else {
             $status = str_replace($responseTemplate['good'],"[[msg]]","Success!");
-            require_once(FILE_DEPTH . "config.php");
+            require_once(FILE_DEPTH . "includes/config.php");
         }
     ?>    
     <td><?php echo $status; ?></td></tr>
@@ -58,12 +58,16 @@
         } catch(SystemException $ex) {
             $status   = str_replace($responseTemplate['bad'],"[[msg]]","Failed!");
             $hasError = true;
-        } catch(DatabaseException $ex) {
-            $status   = str_replace($responseTemplate['bad'],"[[msg]]","Failed!");
-            $hasError = true;
         }
     ?>    
     <td><?php echo $status; ?></td></tr>
     <?php if($hasError) { echo "</table>";exit(); } ?>
     
+    <!-- More tests can go here... -->
+    
+    <!-- Routing to home.php -->
+    <tr><td colspan="2">Forwarding to login...</td></tr>
+
 </table>
+
+<?php kSystem_redirect(FILE_DEPTH . "home.php");

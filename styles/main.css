@@ -1,0 +1,64 @@
+/* TOP NAVIGATION STYLES ****************************************************************/
+.topNavigation ul li {
+    list-style-type: none;
+    display: inline;
+    padding: 0 10px 0 10px;
+}
+.topNavigation ul li a {
+    text-decoration: none;
+    width: 100px;
+}
+
+/* ACCOUNTS *****************************************************************************/
+.accounts {
+    width: 250px;
+}
+
+/* NEW TRANSACTIONS *********************************************************************/
+.newTransaction {
+    width: 900px;
+}
+
+/* TRANSACTION STYLES *******************************************************************/
+.tDate {
+
+}
+.tType {
+
+}
+.tPayee {
+    width: 100px;
+}
+.tMemo {
+    width: 300px;
+}
+.tAmount {
+    width: 75px;
+    font-style: italic;
+}
+.tCleared {
+
+}
+
+/* GENERAL ******************************************************************************/
+.column {
+    float: left;
+}
+.textRight {
+    text-align: right;
+}
+.textCenter {
+    text-align: center;
+}
+table.displayTable tr td {
+    vertical-align: middle;
+    padding: 0 5px 0 5px;
+}
+table.displayTable tr th {
+    text-align: left;
+    text-decoration: underline;
+}
+.subtext td {
+    font-size: .8em;
+    font-style: italic;
+}
