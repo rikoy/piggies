@@ -15,7 +15,9 @@ class SystemRoot {
     # Function: __construct(...)  
     # Purpose : Creates the object.
     ######################################################################################
-    public function __construct() {}
+    public function __construct() {
+        $this->_createDatabaseResource();
+    }
     
     ######################################################################################
     # Function: connectToDatabase(...)  
@@ -32,18 +34,29 @@ class SystemRoot {
         try {
         	$this->db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS);
         } catch(DatabaseException $ex) {
-        	/* DO SOMETHING USEFUL */
+        	throw new SystemException();
         }
-        
-        /* RETURN SOMETHING */
         
     }
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     ######################################################################################
-    # Function: _verifySystemConstants(...)
-    # Purpose : Verifies that all the required system constants are defined
-    # Returns : (1) true - if all the required constants exist, (2) an array of constant
-    #   names the system requires but could not find.
+    # Function: _createDatabaseResource(...)
+    # Purpose : Creates a DB class for the chosen database type
+    # Returns : Nothing
     ######################################################################################    
     private function _createDatabaseResource() {
         

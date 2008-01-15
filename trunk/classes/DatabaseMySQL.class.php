@@ -10,8 +10,18 @@
 
 class DatabaseMySQL implements IDatabase {
     
-    public function __construct() {}
-    public function db_connect($host,$user,$pass) {}
+    private $_db;
+    
+    public function __construct() {
+        $this->_db = null;
+    }
+    
+    public function db_connect($host,$user,$pass) {
+        $this->_db = mysqli_connect($host,$user,$pass);
+        if(mysqli_connect_errno()) {
+            throw new DatabaseException();
+        }
+    }
     
 }
 
