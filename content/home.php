@@ -20,7 +20,7 @@
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Chase</td>
-                    <td class="textRight">$3,548.96</td>
+                    <td class="textRight subtext">$3,548.96</td>
                 </tr>
                 <tr class="subtext">
                     <td>&nbsp;</td>
@@ -39,7 +39,7 @@
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>HSBC</td>
-                    <td class="textRight">$2,300.54</td>
+                    <td class="textRight subtext">$2,300.54</td>
                 </tr>
                 <tr class="subtext">
                     <td>&nbsp;</td>
@@ -58,7 +58,7 @@
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Capitol One</td>
-                    <td class="textRight">$365.00</td>
+                    <td class="textRight subtext">$365.00</td>
                 </tr>
                 <tr class="subtext">
                     <td>&nbsp;</td>
@@ -122,6 +122,13 @@
     <div class="newTransaction">
         <fieldset>
             <legend>New Transaction</legend>
+            <form>
+                <select name="nt_type">
+                    <option value="withdrawal">Withdrawal</option>
+                    <option value="deposit">Deposit</option>
+                    <option value="transfer">Transfer</option>
+                </select>
+            </form>
         </fieldset>
     </div>
 
@@ -135,7 +142,7 @@
                     <th>Type</th>
                     <th>Payee</th>
                     <th>Memo</th>
-                    <th class="textRight">Amount</th>
+                    <th>Amount</th>
                     <th>Cleared</th>
                 </tr>
                 
@@ -144,9 +151,55 @@
                     <td class="tType">Withdrawal</td>
                     <td class="tPayee">Linnea Petrillo</td>
                     <td class="tMemo">Repayment of Loan</td>
-                    <td class="textRight tAmount">$400.00</td>
+                    <td class="tAmount">$400.00</td>
                     <td class="tCleared textCenter"><input type="checkbox" /></td>
                 </tr>
+                
+                <tr>
+                    <td class="tDate">1/2/2008</td>
+                    <td class="tType">Withdrawal</td>
+                    <td class="tPayee">Linnea Petrillo</td>
+                    <td class="tMemo">Repayment of Loan</td>
+                    <td class="tAmount">$400.00</td>
+                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                </tr>
+                
+                <tr>
+                    <td class="tDate">1/2/2008</td>
+                    <td class="tType">Withdrawal</td>
+                    <td class="tPayee">Linnea Petrillo</td>
+                    <td class="tMemo">Repayment of Loan</td>
+                    <td class="tAmount">$400.00</td>
+                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                </tr>
+                
+                <tr>
+                    <td class="tDate">1/2/2008</td>
+                    <td class="tType">Withdrawal</td>
+                    <td class="tPayee">Linnea Petrillo</td>
+                    <td class="tMemo">Repayment of Loan</td>
+                    <td class="tAmount">$400.00</td>
+                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                </tr>
+                
+                <tr>
+                    <td class="tDate">1/2/2008</td>
+                    <td class="tType">Withdrawal</td>
+                    <td class="tPayee">Linnea Petrillo</td>
+                    <td class="tMemo">Repayment of Loan</td>
+                    <td class="tAmount">$400.00</td>
+                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                </tr>
+                
+                <tr>
+                    <td class="tDate">1/2/2008</td>
+                    <td class="tType">Withdrawal</td>
+                    <td class="tPayee">Linnea Petrillo</td>
+                    <td class="tMemo">Repayment of Loan</td>
+                    <td class="tAmount">$400.00</td>
+                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                </tr>
+                
             </table>
             
         </fieldset>

@@ -1,3 +1,26 @@
+/* GENERAL ******************************************************************************/
+.column {
+    float: left;
+}
+.textRight {
+    text-align: right;
+}
+.textCenter {
+    text-align: center;
+}
+table.displayTable tr td {
+    vertical-align: middle;
+    padding: 0 5px 0 5px;
+}
+table.displayTable tr th {
+    text-align: left;
+    text-decoration: underline;
+}
+.subtext {
+    font-size: .8em;
+    font-style: italic;
+}
+
 /* TOP NAVIGATION STYLES ****************************************************************/
 .topNavigation ul li {
     list-style-type: none;
@@ -38,27 +61,4 @@
 }
 .tCleared {
 
-}
-
-/* GENERAL ******************************************************************************/
-.column {
-    float: left;
-}
-.textRight {
-    text-align: right;
-}
-.textCenter {
-    text-align: center;
-}
-table.displayTable tr td {
-    vertical-align: middle;
-    padding: 0 5px 0 5px;
-}
-table.displayTable tr th {
-    text-align: left;
-    text-decoration: underline;
-}
-.subtext td {
-    font-size: .8em;
-    font-style: italic;
 }
