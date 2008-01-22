@@ -24,6 +24,9 @@ if(SYS_DEBUG) {
 
 /* Include functions */
 require_once("functions.php");
+if(is_file(FILE_DEPTH . "includes/config.php")) { 
+    require_once(FILE_DEPTH . "includes/config.php"); 
+}
 
 ##########################################################################################
 # Function: __autoload(...)

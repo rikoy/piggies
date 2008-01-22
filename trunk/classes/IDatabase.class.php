@@ -9,7 +9,9 @@
 
 interface IDatabase {
     
-    public function db_connect($host,$user,$pass);
+    public function db_connect($host,$user,$pass,$db);
+    public function db_query($query);
+    public function db_fetch_assoc($rs);
     
 }
 

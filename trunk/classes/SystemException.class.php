@@ -8,7 +8,7 @@
 #   [[Application]].
 ##########################################################################################
 
-class SystemException {
+class SystemException extends Exception {
     
     
     

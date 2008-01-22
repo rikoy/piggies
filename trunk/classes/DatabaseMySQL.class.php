@@ -16,11 +16,33 @@ class DatabaseMySQL implements IDatabase {
         $this->_db = null;
     }
     
-    public function db_connect($host,$user,$pass) {
-        $this->_db = mysqli_connect($host,$user,$pass);
+    public function db_connect($host,$user,$pass,$db) {
+
+        $this->_db = mysqli_connect($host,$user,$pass,$db);
         if(mysqli_connect_errno()) {
             throw new DatabaseException();
         }
+
+    }
+    
+    public function db_query($query) {
+
+        if(!$this->_db) {
+            throw new DatabaseException();
+        }
+        
+        $rs = $this->_db->query($query);
+        if(!$rs) {
+            echo $this->_db->error;
+            throw new DatabaseException();
+        }
+        
+        return $rs;
+        
+    }
+
+    public function db_fetch_assoc($rs) {
+        return $rs->mysqli_fetch_assoc();
     }
     
 }

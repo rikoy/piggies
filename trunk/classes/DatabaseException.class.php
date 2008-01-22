@@ -8,7 +8,7 @@
 #   Database exceptions.
 ##########################################################################################
 
-class DatabaseException {
+class DatabaseException extends Exception {
     
     
     
