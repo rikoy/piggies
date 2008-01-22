@@ -9,106 +9,74 @@
     </ul>
 </div>
 
+<?php $sys = new SystemRoot(); ?>
+
 <div class="column">
 
     <!-- ACCOUNTS -->
-    <div class="accounts">
+    <div>
         <fieldset>
             <legend>Accounts (edit)</legend>
-            <table class="displayTable">
-                <!-- ACCT -->
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Chase</td>
-                    <td class="textRight subtext">$3,548.96</td>
-                </tr>
-                <tr class="subtext">
-                    <td>&nbsp;</td>
-                    <td>Pending</td>
-                    <td class="textRight">$500.00</td>
-                </tr>
-                <tr class="subtext">
-                    <td>&nbsp;</td>
-                    <td>Shown</td>
-                    <td class="textRight">$3,048.96</td>
-                </tr>
-                
-                <tr><td colspan="3">&nbsp;</td></tr>
+            <table>
+            <?php foreach($sys->getAccountPodList() as $acctID => $acct) { ?>
                 
                 <!-- ACCT -->
                 <tr>
                     <td><input type="checkbox" /></td>
-                    <td>HSBC</td>
-                    <td class="textRight subtext">$2,300.54</td>
+                    <td><?php echo $acct['name']; ?></td>
+                    <td><?php echo $acct['balance']; ?></td>
                 </tr>
-                <tr class="subtext">
-                    <td>&nbsp;</td>
-                    <td>Pending</td>
-                    <td class="textRight">$0.00</td>
-                </tr>
-                <tr class="subtext">
-                    <td>&nbsp;</td>
-                    <td>Shown</td>
-                    <td class="textRight">$2,300.54</td>
-                </tr>
-                
-                <tr><td colspan="3">&nbsp;</td></tr>
-                
-                <!-- ACCT -->
                 <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Capitol One</td>
-                    <td class="textRight subtext">$365.00</td>
-                </tr>
-                <tr class="subtext">
                     <td>&nbsp;</td>
                     <td>Pending</td>
-                    <td class="textRight">$0.00</td>
+                    <td><?php echo $acct['pending']; ?></td>
                 </tr>
-                <tr class="subtext">
+                <tr>
                     <td>&nbsp;</td>
                     <td>Shown</td>
-                    <td class="textRight">$365.00</td>
-                </tr>     
+                    <td><?php echo $acct['shown']; ?></td>
+                </tr>
+                
+            <?php } ?>  
             </table>
         </fieldset>
     </div>
     
     <!-- BUCKETS -->
-    <div class="bucket">
+    <div>
         <fieldset>
             <legend>Buckets (edit)</legend>
-            <table class="displayTable">
+            <table>
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Salary</td>
-                    <td class="textRight">$63.05</td>
+                    <td>$63.05</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Rent</td>
-                    <td class="textRight">-</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Car Payment</td>
-                    <td class="textRight">$200.00</td>
+                    <td>$200.00</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Car Insurance</td>
-                    <td class="textRight">$105.00</td>
+                    <td>$105.00</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td>Car - Gas</td>
-                    <td class="textRight">$250.00</td>
+                    <td>$250.00</td>
                 </tr>
                 
                 <tr><td colspan="3">&nbsp;</td></tr>
                 <tr>
                     <td colspan="2">Total Allocations</td>
-                    <td class="textRight">$3,548.96</td>
+                    <td>$3,548.96</td>
                 </tr>
             </table>
         </fieldset>
@@ -119,15 +87,74 @@
 <div class="column">
     
     <!-- NEW TRANSACTIONS -->
-    <div class="newTransaction">
+    <div>
         <fieldset>
             <legend>New Transaction</legend>
             <form>
-                <select name="nt_type">
-                    <option value="withdrawal">Withdrawal</option>
-                    <option value="deposit">Deposit</option>
-                    <option value="transfer">Transfer</option>
-                </select>
+                <table>
+                    <tr>
+                        <td>
+                            Date:&nbsp;
+                            <input size="10" value="<?php echo date("n/j/Y"); ?>" type="text" />
+                        </td>
+                        <td>
+                            Type of transaction:&nbsp;
+                            <select name="nt_type">
+                                <option value="withdrawal">Withdrawal</option>
+                                <option value="deposit">Deposit</option>
+                                <option value="transfer">Transfer</option>
+                                <option value="bucket">Bucket</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            From:&nbsp;
+                        </td>
+                        <td>
+                            <select name="from_account">
+                                <option value="">...account...</option>
+                            </select>
+                            <select name="from_bucket">
+                                <option value="">...bucket...</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            To:&nbsp;
+                        </td>
+                        <td>
+                            <select name="to_account">
+                                <option value="">...account...</option>
+                            </select>
+                            <select name="to_bucket">
+                                <option value="">...bucket...</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Payee:&nbsp;
+                            <input type="text" />
+                        </td>
+                        <td>
+                            Amount:&nbsp;
+                            <input type="text" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Memo:<br />
+                            <textarea cols="60" rows="6"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="Submit" />
+                        </td>
+                    </tr>
+                </table>
             </form>
         </fieldset>
     </div>
@@ -136,7 +163,7 @@
     <div class="transactions">
         <fieldset>
             <legend>Transactions :: 11/15/2007 - Today</legend>
-            <table class="displayTable">
+            <table>
                 <tr>
                     <th>Date</th>
                     <th>Type</th>
@@ -147,59 +174,59 @@
                 </tr>
                 
                 <tr>
-                    <td class="tDate">1/2/2008</td>
-                    <td class="tType">Withdrawal</td>
-                    <td class="tPayee">Linnea Petrillo</td>
-                    <td class="tMemo">Repayment of Loan</td>
-                    <td class="tAmount">$400.00</td>
-                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                    <td>1/2/2008</td>
+                    <td>Withdrawal</td>
+                    <td>Linnea Petrillo</td>
+                    <td>Repayment of Loan</td>
+                    <td>$400.00</td>
+                    <td><input type="checkbox" /></td>
                 </tr>
                 
                 <tr>
-                    <td class="tDate">1/2/2008</td>
-                    <td class="tType">Withdrawal</td>
-                    <td class="tPayee">Linnea Petrillo</td>
-                    <td class="tMemo">Repayment of Loan</td>
-                    <td class="tAmount">$400.00</td>
-                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                    <td>1/2/2008</td>
+                    <td>Withdrawal</td>
+                    <td>Linnea Petrillo</td>
+                    <td>Repayment of Loan</td>
+                    <td>$400.00</td>
+                    <td><input type="checkbox" /></td>
                 </tr>
                 
                 <tr>
-                    <td class="tDate">1/2/2008</td>
-                    <td class="tType">Withdrawal</td>
-                    <td class="tPayee">Linnea Petrillo</td>
-                    <td class="tMemo">Repayment of Loan</td>
-                    <td class="tAmount">$400.00</td>
-                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                    <td>1/2/2008</td>
+                    <td>Withdrawal</td>
+                    <td>Linnea Petrillo</td>
+                    <td>Repayment of Loan</td>
+                    <td>$400.00</td>
+                    <td><input type="checkbox" /></td>
                 </tr>
                 
                 <tr>
-                    <td class="tDate">1/2/2008</td>
-                    <td class="tType">Withdrawal</td>
-                    <td class="tPayee">Linnea Petrillo</td>
-                    <td class="tMemo">Repayment of Loan</td>
-                    <td class="tAmount">$400.00</td>
-                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                    <td>1/2/2008</td>
+                    <td>Withdrawal</td>
+                    <td>Linnea Petrillo</td>
+                    <td>Repayment of Loan</td>
+                    <td>$400.00</td>
+                    <td><input type="checkbox" /></td>
                 </tr>
                 
                 <tr>
-                    <td class="tDate">1/2/2008</td>
-                    <td class="tType">Withdrawal</td>
-                    <td class="tPayee">Linnea Petrillo</td>
-                    <td class="tMemo">Repayment of Loan</td>
-                    <td class="tAmount">$400.00</td>
-                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                    <td>1/2/2008</td>
+                    <td>Withdrawal</td>
+                    <td>Linnea Petrillo</td>
+                    <td>Repayment of Loan</td>
+                    <td>$400.00</td>
+                    <td><input type="checkbox" /></td>
                 </tr>
                 
                 <tr>
-                    <td class="tDate">1/2/2008</td>
-                    <td class="tType">Withdrawal</td>
-                    <td class="tPayee">Linnea Petrillo</td>
-                    <td class="tMemo">Repayment of Loan</td>
-                    <td class="tAmount">$400.00</td>
-                    <td class="tCleared textCenter"><input type="checkbox" /></td>
+                    <td>1/2/2008</td>
+                    <td>Withdrawal</td>
+                    <td>Linnea Petrillo</td>
+                    <td>Repayment of Loan</td>
+                    <td>$400.00</td>
+                    <td><input type="checkbox" /></td>
                 </tr>
-                
+
             </table>
             
         </fieldset>

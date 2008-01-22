@@ -17,6 +17,7 @@ class SystemRoot {
     ######################################################################################
     public function __construct() {
         $this->_createDatabaseResource();
+        $this->_connectToDatabase();
     }
     
     ######################################################################################
@@ -39,6 +40,53 @@ class SystemRoot {
         
     }
     
+    # ********************************************************************************** #
+    # ***** ACCOUNTS ******************************************************************* #
+    # ********************************************************************************** #
+    
+    ######################################################################################
+    # Function: getAccountPodList(...)
+    # Purpose : Returns array of accounts, balances, pending, and cleared
+    ######################################################################################    
+    public function getAccountPodList() {
+        
+        $p = SYS_DB_PREFIX; /* Get table prefix */
+        try {
+            $rs = $this->db->db_query(
+                "SELECT account_id, account_name, transaction_cleared, 
+                    SUM(details_amount) as total
+                 FROM {$p}accounts 
+                    INNER JOIN {$p}transaction_details
+                        ON account_id = details_account_id
+                    INNER JOIN {$p}transactions
+                        ON transaction_id = details_transaction_id
+                 GROUP BY account_name, transaction_cleared"
+            );
+        } catch (DatabaseException $ex) {
+            throw new SystemException();
+        }
+        
+        $arr = array();
+        while($row = $this->db->db_fetch_assoc($rs)) {
+            if(!isset($arr[$row['account_id']]['name'])) {
+                $arr[$row['account_id']]['name']    = $row['account_name'];
+                $arr[$row['account_id']]['balance'] = 0;
+                $arr[$row['account_id']]['pending'] = 0;
+                $arr[$row['account_id']]['shown']   = 0;
+            }
+            
+            if($row['transaction_cleared'] == 0) {
+                $arr[$row['account_id']]['pending'] += $row['total'];
+            } else {
+                $arr[$row['account_id']]['pending'] += $row['shown'];
+            }
+            $arr[$row['account_id']]['balance'] += $row['total'];
+                
+        }
+        
+        return $arr;
+        
+    }
     
     
     
@@ -46,12 +94,9 @@ class SystemRoot {
     
     
     
-    
-    
-    
-    
-    
-    
+    # ********************************************************************************** #
+    # ***** PRIVATE ******************************************************************** #
+    # ********************************************************************************** #    
     
     ######################################################################################
     # Function: _createDatabaseResource(...)
@@ -84,6 +129,22 @@ class SystemRoot {
         return count($missingConstants) > 0 ? $missingConstants : true;
         
     }
+    
+    ######################################################################################
+    # Function: _connectToDatabase(...)  
+    # Purpose : Connects to the database defined in config.php
+    ######################################################################################
+    public function _connectToDatabase() {
+               
+        /* Attempt to connect to database and return results */
+        try {
+        	$this->db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS,SYS_DB_NAME);
+        	
+        } catch(DatabaseException $ex) {
+        	throw new SystemException();
+        }
+        
+    }    
     
 }
 
