@@ -42,7 +42,7 @@ class DatabaseMySQL implements IDatabase {
     }
 
     public function db_fetch_assoc($rs) {
-        return $rs->mysqli_fetch_assoc();
+        return $rs->fetch_assoc();
     }
     
 }
