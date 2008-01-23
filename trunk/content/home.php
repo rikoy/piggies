@@ -19,22 +19,22 @@
             <legend>Accounts (edit)</legend>
             <table>
             <?php foreach($sys->getAccountPodList() as $acctID => $acct) { ?>
-                
+            
                 <!-- ACCT -->
                 <tr>
                     <td><input type="checkbox" /></td>
                     <td><?php echo $acct['name']; ?></td>
-                    <td><?php echo $acct['balance']; ?></td>
+                    <td><?php echo kSystem_currency($acct['balance']); ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                     <td>Pending</td>
-                    <td><?php echo $acct['pending']; ?></td>
+                    <td><?php echo kSystem_currency($acct['pending']); ?></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                     <td>Shown</td>
-                    <td><?php echo $acct['shown']; ?></td>
+                    <td><?php echo kSystem_currency($acct['shown']); ?></td>
                 </tr>
                 
             <?php } ?>  
@@ -90,72 +90,7 @@
     <div>
         <fieldset>
             <legend>New Transaction</legend>
-            <form>
-                <table>
-                    <tr>
-                        <td>
-                            Date:&nbsp;
-                            <input size="10" value="<?php echo date("n/j/Y"); ?>" type="text" />
-                        </td>
-                        <td>
-                            Type of transaction:&nbsp;
-                            <select name="nt_type">
-                                <option value="withdrawal">Withdrawal</option>
-                                <option value="deposit">Deposit</option>
-                                <option value="transfer">Transfer</option>
-                                <option value="bucket">Bucket</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            From:&nbsp;
-                        </td>
-                        <td>
-                            <select name="from_account">
-                                <option value="">...account...</option>
-                            </select>
-                            <select name="from_bucket">
-                                <option value="">...bucket...</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            To:&nbsp;
-                        </td>
-                        <td>
-                            <select name="to_account">
-                                <option value="">...account...</option>
-                            </select>
-                            <select name="to_bucket">
-                                <option value="">...bucket...</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Payee:&nbsp;
-                            <input type="text" />
-                        </td>
-                        <td>
-                            Amount:&nbsp;
-                            <input type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            Memo:<br />
-                            <textarea cols="60" rows="6"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="Submit" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            
         </fieldset>
     </div>
 
@@ -173,59 +108,20 @@
                     <th>Cleared</th>
                 </tr>
                 
+                <?php $p = array("accountID = 1"); ?>
+                <?php foreach($sys->getTransactionList($p) as $transID => $trans) { ?>
+				
                 <tr>
-                    <td>1/2/2008</td>
-                    <td>Withdrawal</td>
-                    <td>Linnea Petrillo</td>
-                    <td>Repayment of Loan</td>
-                    <td>$400.00</td>
-                    <td><input type="checkbox" /></td>
+                    <td><?php echo kSystem_date($trans['date']); ?></td>
+                    <td><?php echo $trans['type']; ?></td>
+                    <td><?php echo $trans['payee']; ?></td>
+                    <td><?php echo $trans['memo']; ?></td>
+                    <td><?php echo kSystem_currency($trans['amount']); ?></td>
+                    <td><input type="checkbox" 
+                    	<?php echo $trans['cleared'] ? "CHECKED" : "" ?> /></td>
                 </tr>
                 
-                <tr>
-                    <td>1/2/2008</td>
-                    <td>Withdrawal</td>
-                    <td>Linnea Petrillo</td>
-                    <td>Repayment of Loan</td>
-                    <td>$400.00</td>
-                    <td><input type="checkbox" /></td>
-                </tr>
-                
-                <tr>
-                    <td>1/2/2008</td>
-                    <td>Withdrawal</td>
-                    <td>Linnea Petrillo</td>
-                    <td>Repayment of Loan</td>
-                    <td>$400.00</td>
-                    <td><input type="checkbox" /></td>
-                </tr>
-                
-                <tr>
-                    <td>1/2/2008</td>
-                    <td>Withdrawal</td>
-                    <td>Linnea Petrillo</td>
-                    <td>Repayment of Loan</td>
-                    <td>$400.00</td>
-                    <td><input type="checkbox" /></td>
-                </tr>
-                
-                <tr>
-                    <td>1/2/2008</td>
-                    <td>Withdrawal</td>
-                    <td>Linnea Petrillo</td>
-                    <td>Repayment of Loan</td>
-                    <td>$400.00</td>
-                    <td><input type="checkbox" /></td>
-                </tr>
-                
-                <tr>
-                    <td>1/2/2008</td>
-                    <td>Withdrawal</td>
-                    <td>Linnea Petrillo</td>
-                    <td>Repayment of Loan</td>
-                    <td>$400.00</td>
-                    <td><input type="checkbox" /></td>
-                </tr>
+                <?php } ?>
 
             </table>
             

@@ -9,7 +9,7 @@
 
 class SystemRoot {
     
-    private $db;
+    private $_db;
     
     ######################################################################################
     # Function: __construct(...)  
@@ -33,7 +33,7 @@ class SystemRoot {
         
         /* Attempt to connect to database and return results */
         try {
-        	$this->db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS);
+        	$this->_db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS);
         } catch(DatabaseException $ex) {
         	throw new SystemException();
         }
@@ -52,13 +52,13 @@ class SystemRoot {
         
         $p = SYS_DB_PREFIX; /* Get table prefix */
         try {
-            $rs = $this->db->db_query(
+            $rs = $this->_db->db_query(
                 "SELECT account_id, account_name, transaction_cleared, 
                     SUM(details_amount) as total
                  FROM {$p}accounts 
-                    INNER JOIN {$p}transaction_details
+                    LEFT JOIN {$p}transaction_details
                         ON account_id = details_account_id
-                    INNER JOIN {$p}transactions
+                    LEFT JOIN {$p}transactions
                         ON transaction_id = details_transaction_id
                  GROUP BY account_name, transaction_cleared"
             );
@@ -67,7 +67,7 @@ class SystemRoot {
         }
         
         $arr = array();
-        while($row = $this->db->db_fetch_assoc($rs)) {
+        while($row = $this->_db->db_fetch_assoc($rs)) {
             if(!isset($arr[$row['account_id']]['name'])) {
                 $arr[$row['account_id']]['name']    = $row['account_name'];
                 $arr[$row['account_id']]['balance'] = 0;
@@ -78,7 +78,7 @@ class SystemRoot {
             if($row['transaction_cleared'] == 0) {
                 $arr[$row['account_id']]['pending'] += $row['total'];
             } else {
-                $arr[$row['account_id']]['pending'] += $row['shown'];
+                $arr[$row['account_id']]['shown'] += $row['total'];
             }
             $arr[$row['account_id']]['balance'] += $row['total'];
                 
@@ -89,10 +89,45 @@ class SystemRoot {
     }
     
     
-    
-    
-    
-    
+    ######################################################################################
+    # Function: getAccountPodList(...)
+    # Purpose : Returns array of accounts, balances, pending, and cleared
+    ######################################################################################    
+    public function getTransactionList($params="") {
+        
+        $accountID = ( isset($params['accountID']) ? $params['accountID'] : "" );
+        $bucketID  = ( isset($params['bucketID'])  ? $params['bucketID']  : "" );
+        
+        
+        $p = SYS_DB_PREFIX; /* Get table prefix */
+        try {
+            $rs = $this->_db->db_query(
+                "SELECT details_id, transaction_id, transaction_type, transaction_payee,
+                	transaction_memo, transaction_cleared, 
+                	details_amount, UNIX_TIMESTAMP(transaction_posted_ts) AS ts
+               	 FROM {$p}transaction_details
+               	 	LEFT JOIN {$p}transactions
+               	 		ON details_transaction_id = transaction_id
+               	 WHERE details_account_id = 1"
+            );
+        } catch (DatabaseException $ex) {
+            throw new SystemException();
+        }
+        
+        $arr = array();
+        while($row = $this->_db->db_fetch_assoc($rs)) {
+            $arr[$row['transaction_id']]['date']    = $row['ts'];
+            $arr[$row['transaction_id']]['type']    = $row['transaction_type'];
+            $arr[$row['transaction_id']]['payee']   = $row['transaction_payee'];
+			$arr[$row['transaction_id']]['memo']    = $row['transaction_memo'];
+			$arr[$row['transaction_id']]['amount']  = $row['details_amount'];
+			$arr[$row['transaction_id']]['cleared'] = $row['transaction_cleared'];
+                
+        }
+        
+        return $arr;
+        
+    }
     
     # ********************************************************************************** #
     # ***** PRIVATE ******************************************************************** #
@@ -106,7 +141,7 @@ class SystemRoot {
     private function _createDatabaseResource() {
         
         $dbType   = "Database".SYS_DB_TYPE;
-        $this->db = new $dbType();
+        $this->_db = new $dbType();
         
     }    
     
@@ -138,7 +173,7 @@ class SystemRoot {
                
         /* Attempt to connect to database and return results */
         try {
-        	$this->db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS,SYS_DB_NAME);
+        	$this->_db->db_connect(SYS_DB_HOST,SYS_DB_USER,SYS_DB_PASS,SYS_DB_NAME);
         	
         } catch(DatabaseException $ex) {
         	throw new SystemException();

@@ -7,6 +7,14 @@
 # Purpose: Collection of basic functions used through the application
 ##########################################################################################
 
+function kSystem_currency($amount) {
+	return ( $amount >= 0 ? sprintf('$%.2f',$amount) : sprintf('-$%.2f',abs($amount)) );
+}
+
+function kSystem_date($ts) {
+	return date("m/d/Y",$ts);
+}
+
 function kSystem_redirect($filename) {
     
     /* If the buffers are full, flush them */
