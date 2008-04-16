@@ -42,6 +42,7 @@ class miniBoxScores {
         $this->data = array();
         xml_parse($this->parser,$xml);
 
+        //echo $xml;
         //print_r($this->data);
         
 	}
@@ -70,15 +71,50 @@ class miniBoxScores {
                         "[[away_id]]"   => $attr["AWAY_TEAM_ID"],
                         "[[away_name]]" => $attr["AWAY_TEAM_NAME"],
                         "[[away_runs]]" => isset($attr["AWAY_TEAM_RUNS"]) ? intval($attr["AWAY_TEAM_RUNS"]) : 0,
-                        "[[status]]"    => $attr["STATUS"] != "Preview" &&  $attr["STATUS"] != "Pre-Game" ? 
-                                            $attr["STATUS"] : 
-                                            $attr["TIME"].$attr["AMPM"]." (".$attr["TIME_ZONE"].")"
+                        "[[status]]"    => $this->calculate_status($attr)
                     );break;
 	        
 	        default:
                 break;
 	        
 	    }
+	    
+	}
+	
+	######################################################################################
+	# calculate_status(...)
+	# Purpose: Returns the string for status for pre, during, and post game
+	# @arg     &$attr      Reference to a tags attributes
+	######################################################################################
+	private function calculate_status(&$attr) {
+	    
+	    $ending = array(
+	       "0" => "th",
+	       "1" => "st",
+	       "2" => "nd",
+	       "3" => "rd",
+	       "4" => "th",
+	       "5" => "th",
+	       "6" => "th",
+	       "7" => "th",
+	       "8" => "th",
+	       "9" => "th",
+	    );
+	    
+	    $status = $attr["STATUS"];
+	    $top    = (isset($attr["TOP_INNING"]) ? $attr["TOP_INNING"] : "" );
+	    $inning = (isset($attr["INNING"])     ? $attr["INNING"] : "" );
+	    $time   = $attr["TIME"].$attr["AMPM"]." (".$attr["TIME_ZONE"].")";
+	    
+	    if($status == "Final") {
+	        return "Final";
+	    } elseif($status != "Preview") {
+	        return ($top == "Y" ? "Top of the " : "Bot of the ") . $inning . $ending[ $inning % 10 ];
+	    } else {
+	        return $time;
+	    }
+	    
+	    
 	    
 	}
 	
