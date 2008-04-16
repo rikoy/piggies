@@ -105,8 +105,28 @@ class miniBoxScores {
 	    
 	}
 	
-	
-	
+	######################################################################################
+	# get_update(...)
+	# Purpose: Returns array representing sidebar updated data
+	######################################################################################
+	public function get_update() {
+	    
+	    $json = array();
+	    
+	    foreach($this->data as $game) {
+            
+            $json[$game["[[game_id]]"]] = 
+                array(
+                    "status"    => $game["[[status]]"],
+                    "away_runs" => $game["[[away_runs]]"],
+                    "home_runs" => $game["[[home_runs]]"],
+                );
+
+	    }
+	    
+	    return $json;
+	    
+	}
 
 }
 
