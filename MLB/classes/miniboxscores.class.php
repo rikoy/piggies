@@ -70,7 +70,7 @@ class miniBoxScores {
                         "[[away_id]]"   => $attr["AWAY_TEAM_ID"],
                         "[[away_name]]" => $attr["AWAY_TEAM_NAME"],
                         "[[away_runs]]" => isset($attr["AWAY_TEAM_RUNS"]) ? intval($attr["AWAY_TEAM_RUNS"]) : 0,
-                        "[[status]]"    => $attr["STATUS"] != "Preview" ? 
+                        "[[status]]"    => $attr["STATUS"] != "Preview" &&  $attr["STATUS"] != "Pre-Game" ? 
                                             $attr["STATUS"] : 
                                             $attr["TIME"].$attr["AMPM"]." (".$attr["TIME_ZONE"].")"
                     );break;
