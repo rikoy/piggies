@@ -1,0 +1,39 @@
+/* SIDEBAR CONSTRUCTION */
+
+.sidebar {
+	border:	1px solid black;
+	width:	150px;
+	float:	left;
+}
+
+.sidebar .miniboxscore {
+	padding-bottom: 10px;
+}
+
+.sidebar .miniboxscore table {
+	width:	100%;
+}
+
+.sidebar .miniboxscore .hovering {
+    background-color: red;
+}
+
+.sidebar .miniboxscore .team_score {
+    text-align:     right;
+    padding-right:  10px;
+}
+
+.sidebar .miniboxscore .status {
+    text-align: right;
+    font-size:  .7em;
+    font-style: italic;
+}
+
+
+
+/* SIDEBAR CONSTRUCTION */
+.content {
+	border:	1px solid black;
+	width:	500px;
+	float:	left;
+}
