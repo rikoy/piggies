@@ -2,7 +2,7 @@
  * GLOBALS
  ****************************************************************************************/
 var SIDEBAR_TIMER;
-var SIDEBAR_INTERVAL = 15000; // 1000 = 1 second
+var SIDEBAR_INTERVAL = 60000; // 1000 = 1 second
 
 
 
