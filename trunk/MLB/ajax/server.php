@@ -25,6 +25,7 @@ function array2JSON($arr,$type="OBJ") {
 # CLASSES
 ##########################################################################################
 require("../classes/miniboxscores.class.php");
+require("../classes/boxscores.class.php");
 
 ##########################################################################################
 # server.php
@@ -41,6 +42,11 @@ switch($_REQUEST["rqst"]) {
         echo array2json($obj->get_update());
         
         break;
+        
+    case "boxscore":
+    
+    	$obj = new boxScores( $_REQUEST["game"], date("m-d-Y") );
+    	echo array2json($obj->get_update());
         
     default:
     
