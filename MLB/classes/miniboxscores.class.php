@@ -67,10 +67,14 @@ class miniBoxScores {
                         "[[link]]"      => $attr["GAMEDAY_LINK"],
                         "[[home_id]]"   => $attr["HOME_TEAM_ID"],
                         "[[home_name]]" => $attr["HOME_TEAM_NAME"],
-                        "[[home_runs]]" => isset($attr["HOME_TEAM_RUNS"]) ? intval($attr["HOME_TEAM_RUNS"]) : 0,
+                        "[[home_runs]]" => isset($attr["HOME_TEAM_RUNS"]) ? 
+                        					intval($attr["HOME_TEAM_RUNS"]) : 
+                        					0,
                         "[[away_id]]"   => $attr["AWAY_TEAM_ID"],
                         "[[away_name]]" => $attr["AWAY_TEAM_NAME"],
-                        "[[away_runs]]" => isset($attr["AWAY_TEAM_RUNS"]) ? intval($attr["AWAY_TEAM_RUNS"]) : 0,
+                        "[[away_runs]]" => isset($attr["AWAY_TEAM_RUNS"]) ? 
+                        					intval($attr["AWAY_TEAM_RUNS"]) : 
+                        					0,
                         "[[status]]"    => $this->calculate_status($attr)
                     );break;
 	        
@@ -109,12 +113,11 @@ class miniBoxScores {
 	    if($status == "Final") {
 	        return "Final";
 	    } elseif($status != "Preview") {
-	        return ($top == "Y" ? "Top of the " : "Bot of the ") . $inning . $ending[ $inning % 10 ];
+	        return ($top == "Y" ? "Top of the " : "Bot of the ") . $inning . 
+	        	$ending[ $inning % 10 ];
 	    } else {
 	        return $time;
 	    }
-	    
-	    
 	    
 	}
 	

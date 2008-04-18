@@ -6,6 +6,8 @@
 	float:	left;
 }
 
+/* MINI BOX SCORES */
+
 .sidebar .miniboxscore {
 	padding-bottom: 10px;
 }
@@ -29,11 +31,33 @@
     font-style: italic;
 }
 
-
-
 /* CONTENT CONSTRUCTION */
 .content {
-	border:	1px solid black;
 	width:	500px;
 	float:	left;
+}
+
+/* BOX SCORE */
+.content .boxscore table {
+	border-collapse: collapse;
+	width: 85%;
+}
+
+.content .boxscore table td {
+	border: 1px solid black;
+}
+
+.content .boxscore td.spacer {
+	border-top: 0;
+	border-left: 0;
+}
+
+.content .boxscore .innings,
+.content .boxscore .home_team,
+.content .boxscore .away_team {
+	text-align: center;
+}
+
+.content .boxscore .team_name {
+	text-align: left;
 }
