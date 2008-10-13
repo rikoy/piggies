@@ -1,4 +1,8 @@
 <?php
+
+/* We're going to use native sessions, so here we go */
+session_start();
+
 /*
 |---------------------------------------------------------------
 | PHP ERROR REPORTING LEVEL
