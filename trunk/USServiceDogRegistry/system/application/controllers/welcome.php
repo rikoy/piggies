@@ -10,7 +10,7 @@ class Welcome extends Controller {
 	function index()
 	{
 		$this->load->view('common/header');
-		$this->load->view('homepage');
+		$this->load->view('homepage/homepage');
 		$this->load->view('common/footer');
 	}
 }
